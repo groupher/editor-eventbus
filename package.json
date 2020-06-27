@@ -33,8 +33,7 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
-    "@groupher/editor-utils": "^0.1.17",
-    "@groupher/eslint-config-web": "^2.0.9",
-    "pubsub-js": "^1.8.0"
+    "@groupher/editor-utils": "0.1.41",
+    "@groupher/eslint-config-web": "^2.0.9"
   }
 }

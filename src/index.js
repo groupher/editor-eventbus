@@ -1,6 +1,4 @@
-import { make, debounce } from '@groupher/editor-utils'
-import PubSub from 'pubsub-js'
-
+import { make, debounce, initEventBus, EVENTS } from '@groupher/editor-utils'
 import './index.css'
 
 /**
@@ -38,16 +36,18 @@ export default class EventBus {
 
     this.mentionContainer = make('div', [this.CSS.mentionContainer], {})
 
-    if (!window.PubSub) {
-      window.PubSub = PubSub
-    }
-    window.PubSub.unsubscribe('KEEP_PARAGRAPH_BEFORE_REMOVED')
-    window.PubSub.subscribe('KEEP_PARAGRAPH_BEFORE_REMOVED', (type, data) => {
-      console.log('in eventbus')
+    this.eventBus = initEventBus()
 
-      this.api.blocks.insert('paragraph', {}, {}, data, true)
-      this.api.caret.setToBlock(data, 'start')
-    })
+    this.eventBus.unsubscribe(EVENTS.KEEP_PARAGRAPH_AFTER_REMOVED)
+    this.eventBus.subscribe(
+      EVENTS.KEEP_PARAGRAPH_AFTER_REMOVED,
+      (type, data) => {
+        console.log('in eventbus ..')
+
+        this.api.blocks.insert('paragraph', {}, {}, data, true)
+        this.api.caret.setToBlock(data, 'start')
+      },
+    )
   }
 
   /**
