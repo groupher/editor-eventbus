@@ -30,8 +30,6 @@ export default class EventBus {
     this.CSS = {
       mentionToolbarBlock: 'cdx-mention-toolbar-block',
       mentionContainer: 'cdx-mention__container',
-      mention: 'cdx-mention',
-      inlineToolbarButtons: 'ce-inline-toolbar__buttons',
     }
 
     this.mentionContainer = make('div', [this.CSS.mentionContainer], {})
@@ -56,27 +54,20 @@ export default class EventBus {
    * @return {HTMLElement}
    */
   render() {
-    const emptyDiv = make('div', [this.CSS.mentionToolbarBlock], {})
-
+    const emptyDiv = make('div')
     return emptyDiv
   }
+
+  surround(range) {}
+
+  checkState(selection) {}
 
   /**
    * NOTE:  inline tool must have this method
    *
    * @param {Range} range - selected fragment
    */
-  surround(range) {}
-
-  handleNormalActions() {
-    // console.log('showActions');
-    this.mentionContainer.hidden = true
-    let inlineButtons = document.querySelector(
-      '.' + this.CSS.inlineToolbarButtons,
-    )
-
-    inlineButtons.style.display = 'block'
-  }
+  // surround(range) {}
 
   // clear suggestions list
 
