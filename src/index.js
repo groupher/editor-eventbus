@@ -1,5 +1,5 @@
 import { make, debounce, initEventBus, EVENTS } from '@groupher/editor-utils'
-import './index.css'
+import css from './index.css'
 
 /**
  * EventBus Tool for the Editor.js
@@ -28,11 +28,8 @@ export default class EventBus {
      */
 
     this.CSS = {
-      mentionToolbarBlock: 'cdx-mention-toolbar-block',
-      mentionContainer: 'cdx-mention__container',
+      hiddenInlineToolbar: 'cdx-hidden-toolbar-block',
     }
-
-    this.mentionContainer = make('div', [this.CSS.mentionContainer], {})
 
     this.eventBus = initEventBus()
 
@@ -54,7 +51,7 @@ export default class EventBus {
    * @return {HTMLElement}
    */
   render() {
-    const emptyDiv = make('div')
+    const emptyDiv = make('div', this.CSS.hiddenInlineToolbar)
     return emptyDiv
   }
 
